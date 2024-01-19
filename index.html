@@ -12,6 +12,28 @@
             let choice = choices[Math.floor(Math.random() * choices.length)]
             return choice
         }
+
+        function playRound (player, computer) {
+            let result
+            let playerLower = player.toLowerCase()
+            if (playerLower === computer) {
+                result = 'You Tie.'
+            }
+            else if (playerLower === 'rock') {
+                (computer === 'scissors') ? result = `You Win! ${playerLower} beats ${computer}.` : result = `You Lose! ${computer} beats ${playerLower}.` 
+            }
+            else if (playerLower === 'paper') {
+                (computer === 'scissors') ? result = `You Lose! ${computer} beats ${playerLower}.` : result = `You Win! ${playerLower} beats ${computer}.` 
+            }
+            else {
+                (computer === 'rock') ? result = `You Lose! ${computer} beats ${playerLower}.` : result = `You Win! ${playerLower} beats ${computer}.` 
+            }
+            return result
+        }
+
+        const playerSelection = 'PAPER'
+        const computerSelection = getComputerChoice()
+        console.log (playRound(playerSelection, computerSelection))
     </script>
 </body>
 </html>
