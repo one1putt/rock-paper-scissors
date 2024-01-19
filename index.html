@@ -16,24 +16,71 @@
         function playRound (player, computer) {
             let result
             let playerLower = player.toLowerCase()
-            if (playerLower === computer) {
-                result = 'You Tie.'
+            while (playerLower === computer) {
+                computer = getComputerChoice()
             }
-            else if (playerLower === 'rock') {
-                (computer === 'scissors') ? result = `You Win! ${playerLower} beats ${computer}.` : result = `You Lose! ${computer} beats ${playerLower}.` 
+            if (playerLower === 'rock') {
+                (computer === 'scissors') ? result = 1 : result = 0 
             }
             else if (playerLower === 'paper') {
-                (computer === 'scissors') ? result = `You Lose! ${computer} beats ${playerLower}.` : result = `You Win! ${playerLower} beats ${computer}.` 
+                (computer === 'scissors') ? result = 0 : result = 1 
             }
             else {
-                (computer === 'rock') ? result = `You Lose! ${computer} beats ${playerLower}.` : result = `You Win! ${playerLower} beats ${computer}.` 
+                (computer === 'rock') ? result = 0 : result = 1 
+            }
+            if (result === 1) {
+                console.log(`You Win!! ${playerLower} beats ${computer}.`)
+            }
+            else {
+                console.log(`You lose!! ${computer} beats ${playerLower}.`)
             }
             return result
         }
 
-        const playerSelection = 'PAPER'
-        const computerSelection = getComputerChoice()
-        console.log (playRound(playerSelection, computerSelection))
+        function game () {
+            let playerSelection
+            let computerSelection
+            // intro to game
+            console.log("let's play Rock, Paper, Scissors...best of 5")
+            // game to run 5 times (best of 5)
+            for (let i = 0; i < 5; i++) {
+                // prompt for user input
+                playerSelection = prompt('Enter your move:')
+                // get computerSelection
+                computerSelection = getComputerChoice()
+                // playRound and determine winner
+                let result = playRound(playerSelection, computerSelection)
+                result ? wins++ : losses++
+                
+                // if tie have computer rechoose
+                // playRound again
+                // track winner
+
+                // if played three times or more check for winner
+                // if winner end game
+                if (wins === 3 || losses === 3) {
+                    return
+                }
+            }
+            return
+        }
+        
+            // report winner
+        let wins = 0
+        let losses = 0
+        game()
+
+        // interesting: I have not been using ;'s' but without it after the game call above, I get a TypeError that game is not a function. the error comes after game() executes and the lines below try to get executed. if i add the semi it works fine. If I do a formal if/else (see below) then it works without the semi; if i eliminate the () around wins === 3 then it works without the semi. I read that you have to be careful of lines that start with a ( since it thinks this is part of the previous line.
+
+        wins === 3 ? console.log(`Congrats!! You won ${wins} to ${losses}.`) : console.log(`You lost ${wins} to ${losses}.`)
+
+        // if (wins === 3) {
+        //     console.log(`Congrats!! You won ${wins} to ${losses}.`)
+        // }
+        // else {
+        //     console.log(`You lost ${wins} to ${losses}.`)
+        // }
+
     </script>
 </body>
 </html>
