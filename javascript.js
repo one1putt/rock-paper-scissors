@@ -7,7 +7,6 @@ let losses = 0
 buttons.forEach((button) => button.addEventListener('click', () => {
     (playRound(button.textContent, getComputerChoice())) ? wins++ : losses++
     if (wins === 5 || losses === 5) {
-        buttons.forEach((button) => )
         if (wins === 5) {
             score.textContent = `You won the game ${wins} to ${losses}.`
         } else {
