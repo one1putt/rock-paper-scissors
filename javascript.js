@@ -1,8 +1,9 @@
-const buttons = document.querySelectorAll('button')
+const userButtons = document.querySelectorAll('button')
 const results = document.querySelector('.results')
 const score = document.querySelector('.score')
 let wins = 0
 let losses = 0
+const buttons = Array.from(userButtons)
 
 
 // this is the function to run when a button is clicked by the User 
@@ -15,12 +16,16 @@ const clickFunction = (button) => {
     }
 }
 
-buttons.forEach((button) => button.addEventListener('click', clickFunction(button)))
+const clickHandlers = buttons.map((button) => clickFunction(button))
+
+clickHandlers.forEach((handler, index) => buttons[index].addEventListener('click', handler))
+
 
 // fuction to removed the EventListeners after the game is over. unfortunately, 
 // this is not working as intended at the buttons continue to respond. I gave up trying to get them to work.
 function removeListeners() {
-    buttons.forEach((button) => button.removeEventListener('click', clickFunction(button)))
+    console.log('im trying to remove')
+    clickHandlers.forEach((handler, index) => buttons[index].addEventListener('click', handler))
 }
 
 // the guts of the game to track scores and check for winners
